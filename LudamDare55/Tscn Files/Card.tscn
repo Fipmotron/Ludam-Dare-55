@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://doc0j55tahwdr"]
+
+[ext_resource type="Texture2D" uid="uid://b6wrx0eex5jmv" path="res://Sprites/ClubCards-Sheet.png" id="1_t24g0"]
+[ext_resource type="Script" path="res://Scripts/Card.gd" id="2_2xe0i"]
+[ext_resource type="AudioStream" uid="uid://7b52whj0ntt8" path="res://SFX/SummonCardSFX.wav" id="3_3vp36"]
+[ext_resource type="AudioStream" uid="uid://c303ki1nu4b7c" path="res://SFX/CardSFX.wav" id="4_ncdwv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xo3m6"]
+font_size = 64
+font_color = Color(1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_xysym"]
+_data = [Vector2(0.726667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.29671, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8hkq4"]
+curve = SubResource("Curve_xysym")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wilmb"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(-53.27, 97.02, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 5.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_8hkq4")
+color = Color(0.968627, 0.188235, 0, 1)
+
+[node name="Card1" type="Label"]
+size_flags_horizontal = 6
+text = "Card"
+label_settings = SubResource("LabelSettings_xo3m6")
+
+[node name="TempCard1" type="Sprite2D" parent="."]
+position = Vector2(74, 41)
+texture = ExtResource("1_t24g0")
+hframes = 10
+script = ExtResource("2_2xe0i")
+
+[node name="MouseCollision" type="Control" parent="TempCard1"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.996
+offset_left = -51.0
+offset_top = -70.0
+offset_right = -51.0
+offset_bottom = -69.0
+
+[node name="CardTap" type="AudioStreamPlayer2D" parent="TempCard1"]
+stream = ExtResource("3_3vp36")
+
+[node name="SummonCard" type="AudioStreamPlayer2D" parent="TempCard1"]
+stream = ExtResource("4_ncdwv")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="TempCard1"]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_wilmb")
+randomness = 1.0
+
+[connection signal="mouse_entered" from="TempCard1/MouseCollision" to="TempCard1" method="Mouse_entered"]
+[connection signal="mouse_exited" from="TempCard1/MouseCollision" to="TempCard1" method="Mouse_exited"]

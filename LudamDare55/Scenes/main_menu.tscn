@@ -1,0 +1,451 @@
+[gd_scene load_steps=11 format=3 uid="uid://dp4hrnfjqxu6l"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_3paqf"]
+[ext_resource type="Texture2D" uid="uid://64d0ihrvsin1" path="res://Sprites/TitleScreen.png" id="2_pm6hu"]
+[ext_resource type="Texture2D" uid="uid://b55ta0mndwsar" path="res://Sprites/CasinoCamera-Sheet.png" id="2_w1ocx"]
+[ext_resource type="Texture2D" uid="uid://d15blf5q7ibdt" path="res://Sprites/GamblerSprite.png" id="3_w0b5b"]
+[ext_resource type="Texture2D" uid="uid://cmrhlga5cde8" path="res://Sprites/TheDealer-Sheet.png" id="4_sxpv7"]
+[ext_resource type="AudioStream" uid="uid://d35s85edx7c1o" path="res://SFX/ButtonPressSFX.wav" id="5_spaev"]
+[ext_resource type="AudioStream" uid="uid://cjnlw6wioyls" path="res://Music/StraightCheeks.wav" id="6_4h1th"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c2i87"]
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_rnlxy"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_t2y5l"]
+font_size = 32
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_3paqf")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TitleScreen" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(6.00006, 32)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_pm6hu")
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+
+[node name="MainPanel" type="Panel" parent="Main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Main/MainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.635
+anchor_bottom = 0.27
+offset_right = -691.52
+offset_bottom = -151.96
+text = "Out Of Luck"
+label_settings = SubResource("LabelSettings_c2i87")
+
+[node name="StartButton" type="Button" parent="Main/MainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.432
+anchor_right = 0.477
+anchor_bottom = 0.566
+offset_left = -0.256001
+offset_top = 0.0639954
+offset_right = -0.504028
+offset_bottom = 0.231964
+
+[node name="Label" type="Label" parent="Main/MainPanel/StartButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -44.0
+offset_right = 75.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+label_settings = SubResource("LabelSettings_rnlxy")
+
+[node name="HTPButton" type="Button" parent="Main/MainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.631
+anchor_right = 0.477
+anchor_bottom = 0.765
+offset_left = -0.256001
+offset_top = 0.111969
+offset_right = -0.504028
+offset_bottom = 0.279968
+
+[node name="Label" type="Label" parent="Main/MainPanel/HTPButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = -44.0
+offset_right = 188.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "How To Play"
+label_settings = SubResource("LabelSettings_rnlxy")
+
+[node name="QuitButton" type="Button" parent="Main/MainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.835
+anchor_right = 0.214
+anchor_bottom = 0.965
+offset_left = -2.712
+offset_top = -3.08002
+offset_right = 0.471985
+offset_bottom = -0.320007
+
+[node name="Label" type="Label" parent="Main/MainPanel/QuitButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -44.0
+offset_right = 57.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+label_settings = SubResource("LabelSettings_rnlxy")
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="Main/MainPanel"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 605.0
+offset_right = 891.0
+offset_bottom = 621.0
+scale = Vector2(2, 2)
+min_value = -45.0
+max_value = 25.0
+value = -10.0
+
+[node name="Label2" type="Label" parent="Main/MainPanel/VolumeSlider"]
+layout_mode = 0
+offset_left = -71.0
+offset_top = -5.0
+offset_right = -12.0
+offset_bottom = 18.0
+text = "Volume:"
+
+[node name="HTPPanel" type="Panel" parent="Main"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainSubPanel" type="Panel" parent="Main/HTPPanel"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Title" type="Label" parent="Main/HTPPanel/MainSubPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.635
+anchor_bottom = 0.27
+offset_right = 21.4799
+offset_bottom = 0.0399933
+text = "How To Play"
+label_settings = SubResource("LabelSettings_c2i87")
+
+[node name="BackButton" type="Button" parent="Main/HTPPanel/MainSubPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.835
+anchor_right = 0.214
+anchor_bottom = 0.965
+offset_left = -2.712
+offset_top = -3.08002
+offset_right = 0.471985
+offset_bottom = -0.320007
+
+[node name="Label" type="Label" parent="Main/HTPPanel/MainSubPanel/BackButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -44.0
+offset_right = 57.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_rnlxy")
+horizontal_alignment = 1
+
+[node name="NextButton" type="Button" parent="Main/HTPPanel/MainSubPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.835
+anchor_right = 0.214
+anchor_bottom = 0.965
+offset_left = 877.288
+offset_top = -0.0800171
+offset_right = 880.472
+offset_bottom = 2.67999
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Main/HTPPanel/MainSubPanel/NextButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -44.0
+offset_right = 57.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Next
+"
+label_settings = SubResource("LabelSettings_rnlxy")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Main/HTPPanel/MainSubPanel"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 210.0
+offset_right = 964.0
+offset_bottom = 399.0
+text = "The Rules are akin to Black jack:
+1-10 are normal cards with Royal Cards being 11
+
+Closest to 21 gets the JackPot"
+label_settings = SubResource("LabelSettings_t2y5l")
+horizontal_alignment = 1
+
+[node name="CheatSubPanel" type="Panel" parent="Main/HTPPanel"]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="CasinoCamera-sheet" type="Sprite2D" parent="Main/HTPPanel/CheatSubPanel"]
+position = Vector2(635, 400)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_w1ocx")
+hframes = 7
+
+[node name="Label" type="Label" parent="Main/HTPPanel/CheatSubPanel/CasinoCamera-sheet"]
+offset_left = 52.0
+offset_top = -52.0
+offset_right = 302.0
+offset_bottom = 23.0
+text = "-The Camera-
+Mostly Broken, On day 2 and Beyond
+Flashes Yellow and Red when on"
+horizontal_alignment = 1
+
+[node name="GamblerSprite" type="Sprite2D" parent="Main/HTPPanel/CheatSubPanel"]
+position = Vector2(135, 410)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_w0b5b")
+
+[node name="Label" type="Label" parent="Main/HTPPanel/CheatSubPanel/GamblerSprite"]
+offset_left = 48.0
+offset_top = -58.0
+offset_right = 245.0
+offset_bottom = 17.0
+text = "-The Gamblers-
+Watches you occasionally
+flashes yellow and red
+ when watching"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="Main/HTPPanel/CheatSubPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.835
+anchor_right = 0.214
+anchor_bottom = 0.965
+offset_left = -2.712
+offset_top = -3.08002
+offset_right = 0.471985
+offset_bottom = -0.320007
+
+[node name="Label" type="Label" parent="Main/HTPPanel/CheatSubPanel/BackButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -44.0
+offset_right = 57.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_rnlxy")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Main/HTPPanel/CheatSubPanel"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 11.0
+offset_right = 930.0
+offset_bottom = 248.0
+text = "You have the ability to summon cards
+ to exchange them with the ones in your hand
+
+But beware as 
+others can catch you cheating"
+label_settings = SubResource("LabelSettings_t2y5l")
+horizontal_alignment = 1
+
+[node name="Next2Button" type="Button" parent="Main/HTPPanel/CheatSubPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.835
+anchor_right = 0.214
+anchor_bottom = 0.965
+offset_left = 877.288
+offset_top = -0.0800171
+offset_right = 880.472
+offset_bottom = 2.67999
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Main/HTPPanel/CheatSubPanel/Next2Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -44.0
+offset_right = 57.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Next
+"
+label_settings = SubResource("LabelSettings_rnlxy")
+horizontal_alignment = 1
+
+[node name="DealerSubPanel" type="Panel" parent="Main/HTPPanel"]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TheDealer-sheet" type="Sprite2D" parent="Main/HTPPanel/DealerSubPanel"]
+position = Vector2(559, 438)
+scale = Vector2(3, 3)
+texture = ExtResource("4_sxpv7")
+hframes = 6
+
+[node name="BackButton" type="Button" parent="Main/HTPPanel/DealerSubPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.835
+anchor_right = 0.214
+anchor_bottom = 0.965
+offset_left = -2.712
+offset_top = -3.08002
+offset_right = 0.471985
+offset_bottom = -0.320007
+
+[node name="Label" type="Label" parent="Main/HTPPanel/DealerSubPanel/BackButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -44.0
+offset_right = 57.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_rnlxy")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Main/HTPPanel/DealerSubPanel"]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 60.0
+offset_right = 943.0
+offset_bottom = 249.0
+text = "Your not the only one to change cards
+
+After day 3, The Dealer knows your cheating
+and will change you cards to a random Number"
+label_settings = SubResource("LabelSettings_t2y5l")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Main/HTPPanel/DealerSubPanel"]
+layout_mode = 0
+offset_left = 739.0
+offset_top = 578.0
+offset_right = 1126.0
+offset_bottom = 623.0
+text = "Good Luck, And have Fun"
+label_settings = SubResource("LabelSettings_t2y5l")
+horizontal_alignment = 1
+
+[node name="ButtonPressSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_spaev")
+
+[node name="StraightCheeksMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_4h1th")
+volume_db = -5.0
+
+[connection signal="pressed" from="Main/MainPanel/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Main/MainPanel/HTPButton" to="." method="_on_htp_button_pressed"]
+[connection signal="pressed" from="Main/MainPanel/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="Main/MainPanel/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="Main/HTPPanel/MainSubPanel/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Main/HTPPanel/MainSubPanel/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="Main/HTPPanel/CheatSubPanel/BackButton" to="." method="_on_back2_button_pressed"]
+[connection signal="pressed" from="Main/HTPPanel/CheatSubPanel/Next2Button" to="." method="_on_next_2_button_pressed"]
+[connection signal="pressed" from="Main/HTPPanel/DealerSubPanel/BackButton" to="." method="_on_back3_button_pressed"]

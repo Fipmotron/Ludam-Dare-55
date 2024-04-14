@@ -1,0 +1,1088 @@
+[gd_scene load_steps=47 format=3 uid="uid://dgvxcbfa3jf70"]
+
+[ext_resource type="Texture2D" uid="uid://bclk6xdf7to2k" path="res://Sprites/32ProtoSquare.png" id="1_qgftp"]
+[ext_resource type="Script" path="res://Scripts/BettingModeScript.gd" id="1_sb1xa"]
+[ext_resource type="Script" path="res://Scripts/GameSceneManager.gd" id="1_swlsa"]
+[ext_resource type="Texture2D" uid="uid://t80poqadn2w2" path="res://Sprites/32ProtoSquareGreen.png" id="2_7imo2"]
+[ext_resource type="Texture2D" uid="uid://5pu6h662kmc" path="res://Sprites/32ProtoSquareBlue.png" id="3_rm7sx"]
+[ext_resource type="Texture2D" uid="uid://biwbjsrpo6mdm" path="res://Sprites/32ProtoSquareGray.png" id="4_8s0ob"]
+[ext_resource type="Script" path="res://Scripts/ActionModeScript.gd" id="6_okm15"]
+[ext_resource type="PackedScene" uid="uid://doc0j55tahwdr" path="res://Tscn Files/Card.tscn" id="8_0ae84"]
+[ext_resource type="Texture2D" uid="uid://b6wrx0eex5jmv" path="res://Sprites/ClubCards-Sheet.png" id="11_6b0yg"]
+[ext_resource type="Script" path="res://Scripts/Oppenent.gd" id="11_q36c3"]
+[ext_resource type="Texture2D" uid="uid://bjih66me15ggr" path="res://Sprites/DiamondCards-Sheet.png" id="12_7mrbw"]
+[ext_resource type="Script" path="res://Scripts/DayEndModeScript.gd" id="12_tvmr1"]
+[ext_resource type="Script" path="res://Scripts/OppCamera.gd" id="12_yluab"]
+[ext_resource type="Script" path="res://Scripts/Dealer.gd" id="13_h0ipw"]
+[ext_resource type="Texture2D" uid="uid://dy4veseirkafc" path="res://Sprites/HeartCards-Sheet.png" id="13_q2mer"]
+[ext_resource type="Texture2D" uid="uid://fgchirmu4whp" path="res://Sprites/SpadeCards-Sheet.png" id="14_btyth"]
+[ext_resource type="Texture2D" uid="uid://cy8hi0206m581" path="res://Sprites/RoyalCards-Sheet.png" id="15_6en6m"]
+[ext_resource type="Texture2D" uid="uid://cmrhlga5cde8" path="res://Sprites/TheDealer-Sheet.png" id="17_0a5uf"]
+[ext_resource type="Texture2D" uid="uid://173rir4sb45n" path="res://Sprites/CasinoBackground.png" id="17_c0284"]
+[ext_resource type="Texture2D" uid="uid://cgldcj8ncysts" path="res://Sprites/Table2.png" id="18_awhij"]
+[ext_resource type="Texture2D" uid="uid://bniemc2tyyvgq" path="res://Sprites/Table3.png" id="19_cuio4"]
+[ext_resource type="Texture2D" uid="uid://ddfq5o71ln764" path="res://Sprites/GamblerSprite-Sheet.png" id="21_jfbvf"]
+[ext_resource type="Texture2D" uid="uid://b55ta0mndwsar" path="res://Sprites/CasinoCamera-Sheet.png" id="23_0fw31"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8tnur"]
+font_size = 109
+font_color = Color(0, 0, 0, 1)
+outline_size = 10
+outline_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wmui"]
+font_size = 109
+font_color = Color(0, 0, 0, 1)
+outline_size = 10
+outline_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i1ywk"]
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_idhkn"]
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_4o1l8"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_q37j0"]
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_sfwc5"]
+font_size = 128
+
+[sub_resource type="Animation" id="Animation_bs5ef"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_1b750"]
+resource_name = "ChargeUp"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_n8gop"]
+resource_name = "ChangeCard"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yuykq"]
+_data = {
+"ChangeCard": SubResource("Animation_n8gop"),
+"ChargeUp": SubResource("Animation_1b750"),
+"Idle": SubResource("Animation_bs5ef")
+}
+
+[sub_resource type="Animation" id="Animation_ou7yy"]
+resource_name = "Idle"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ghn8g"]
+resource_name = "Sus"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_73q62"]
+resource_name = "Caught"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_prbm4"]
+resource_name = "GameOver"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_xsqfi"]
+resource_name = "Busted"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_icq1v"]
+resource_name = "Won"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6untr"]
+_data = {
+"Busted": SubResource("Animation_xsqfi"),
+"Caught": SubResource("Animation_73q62"),
+"GameOver": SubResource("Animation_prbm4"),
+"Idle": SubResource("Animation_ou7yy"),
+"Sus": SubResource("Animation_ghn8g"),
+"Won": SubResource("Animation_icq1v")
+}
+
+[sub_resource type="Animation" id="Animation_clafd"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_1as6o"]
+resource_name = "Sus"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_j6krt"]
+resource_name = "Caught"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_hxbo6"]
+resource_name = "GameOver"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n06cu"]
+_data = {
+"Caught": SubResource("Animation_j6krt"),
+"GameOver": SubResource("Animation_hxbo6"),
+"Idle": SubResource("Animation_clafd"),
+"Sus": SubResource("Animation_1as6o")
+}
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_swlsa")
+
+[node name="BettingMode" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+script = ExtResource("1_sb1xa")
+metadata/_edit_use_anchors_ = true
+
+[node name="SubtractButton" type="TextureButton" parent="BettingMode"]
+z_index = 99
+layout_mode = 0
+offset_left = 122.0
+offset_top = 344.0
+offset_right = 154.0
+offset_bottom = 376.0
+scale = Vector2(5, 5)
+texture_normal = ExtResource("1_qgftp")
+texture_pressed = ExtResource("2_7imo2")
+texture_hover = ExtResource("3_rm7sx")
+texture_disabled = ExtResource("4_8s0ob")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="BettingMode/SubtractButton"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0500002
+anchor_top = 0.21825
+anchor_right = 0.966
+anchor_bottom = 0.766
+offset_left = -0.400006
+offset_top = 0.0159974
+offset_right = 267.288
+offset_bottom = 157.488
+scale = Vector2(0.1, 0.1)
+text = "-1000"
+label_settings = SubResource("LabelSettings_8tnur")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AddButton" type="TextureButton" parent="BettingMode"]
+z_index = 99
+layout_mode = 0
+offset_left = 873.0
+offset_top = 343.0
+offset_right = 905.0
+offset_bottom = 375.0
+scale = Vector2(5, 5)
+texture_normal = ExtResource("1_qgftp")
+texture_pressed = ExtResource("2_7imo2")
+texture_hover = ExtResource("3_rm7sx")
+texture_disabled = ExtResource("4_8s0ob")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="BettingMode/AddButton"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013
+anchor_top = 0.20575
+anchor_right = 0.981
+anchor_bottom = 0.772
+offset_left = -0.0159999
+offset_top = 0.615997
+offset_right = 279.008
+offset_bottom = 157.496
+scale = Vector2(0.1, 0.1)
+text = "+1000"
+label_settings = SubResource("LabelSettings_3wmui")
+metadata/_edit_use_anchors_ = true
+
+[node name="BetText" type="Label" parent="BettingMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.247
+anchor_top = 0.514
+anchor_right = 0.753
+anchor_bottom = 0.784
+offset_left = -0.544006
+offset_top = -0.071991
+offset_right = 0.543945
+offset_bottom = -0.0320129
+text = "$0000000"
+label_settings = SubResource("LabelSettings_i1ywk")
+metadata/_edit_use_anchors_ = true
+
+[node name="LimitText" type="Label" parent="BettingMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.005
+anchor_top = 0.005
+anchor_right = 0.259
+anchor_bottom = 0.14
+offset_left = 0.24
+offset_top = -0.240031
+offset_right = 291.632
+offset_bottom = 87.28
+scale = Vector2(0.25, 0.25)
+text = "Limit $0000000"
+label_settings = SubResource("LabelSettings_idhkn")
+metadata/_edit_use_anchors_ = true
+
+[node name="PlaceBetButton" type="Button" parent="BettingMode"]
+z_index = 99
+layout_mode = 0
+offset_left = 277.0
+offset_top = 537.0
+offset_right = 876.0
+offset_bottom = 631.0
+text = "Place Bet"
+metadata/_edit_use_anchors_ = true
+
+[node name="ActionMode" type="Control" parent="."]
+visible = false
+z_index = 99
+layout_mode = 3
+anchors_preset = 0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+script = ExtResource("6_okm15")
+
+[node name="ChoiceMode" type="Control" parent="ActionMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StandButton" type="Button" parent="ActionMode/ChoiceMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.009
+anchor_top = 0.898
+anchor_right = 0.489
+anchor_bottom = 0.975
+offset_left = -0.359
+offset_top = -0.00604248
+offset_right = 0.16095
+offset_bottom = 4.91388
+text = "Stand"
+
+[node name="SurrenderButton" type="Button" parent="ActionMode/ChoiceMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.507
+anchor_top = 0.9
+anchor_right = 0.988
+anchor_bottom = 0.977
+offset_left = 0.442993
+offset_top = -0.300049
+offset_right = -0.187988
+offset_bottom = 4.62
+text = "Surrender"
+
+[node name="CheatButton" type="Button" parent="ActionMode/ChoiceMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 0.607
+anchor_right = 0.333
+anchor_bottom = 0.607
+offset_left = -373.283
+offset_top = 114.271
+offset_right = 179.717
+offset_bottom = 169.271
+text = "Cheat"
+
+[node name="HitButton" type="Button" parent="ActionMode/ChoiceMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.507
+anchor_top = 0.785
+anchor_right = 0.988
+anchor_bottom = 0.862
+offset_left = 0.442993
+offset_top = 0.10498
+offset_right = -0.187988
+offset_bottom = 5.02496
+text = "Hit"
+
+[node name="CheatingMode" type="Control" parent="ActionMode"]
+visible = false
+z_index = 99
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="Button" parent="ActionMode/CheatingMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.024
+anchor_top = 0.892
+anchor_right = 0.162
+anchor_bottom = 0.971
+offset_left = 0.351999
+offset_top = -0.0159912
+offset_right = 0.376007
+offset_bottom = -0.208069
+text = "Back"
+
+[node name="ChangeButton" type="Button" parent="ActionMode/CheatingMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.804
+anchor_top = 0.892
+anchor_right = 0.967
+anchor_bottom = 0.971
+offset_left = -0.208008
+offset_top = -0.0159912
+offset_right = 0.0158691
+offset_bottom = -0.208069
+disabled = true
+text = "Change"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ActionMode/CheatingMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -503.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ActionMode/CheatingMode/ScrollContainer"]
+z_index = 99
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AceCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/AceCard"]
+position = Vector2(61, 44)
+texture = ExtResource("11_6b0yg")
+hframes = 10
+
+[node name="AceButton" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/AceCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="TwoCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/TwoCard"]
+position = Vector2(61, 44)
+texture = ExtResource("12_7mrbw")
+hframes = 10
+frame = 1
+
+[node name="Button" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/TwoCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="ThreeCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/ThreeCard"]
+position = Vector2(61, 44)
+texture = ExtResource("13_q2mer")
+hframes = 10
+frame = 2
+
+[node name="Button" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/ThreeCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="FourCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/FourCard"]
+position = Vector2(61, 44)
+texture = ExtResource("14_btyth")
+hframes = 10
+frame = 3
+
+[node name="Button" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/FourCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="FiveCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/FiveCard"]
+position = Vector2(61, 44)
+texture = ExtResource("11_6b0yg")
+hframes = 10
+frame = 4
+
+[node name="Button" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/FiveCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="SixCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/SixCard"]
+position = Vector2(61, 44)
+texture = ExtResource("12_7mrbw")
+hframes = 10
+frame = 5
+
+[node name="Button" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/SixCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="SevenCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/SevenCard"]
+position = Vector2(61, 44)
+texture = ExtResource("13_q2mer")
+hframes = 10
+frame = 6
+
+[node name="Button" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/SevenCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="EightCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/EightCard"]
+position = Vector2(61, 44)
+texture = ExtResource("14_btyth")
+hframes = 10
+frame = 7
+
+[node name="Button" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/EightCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="NineCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/NineCard"]
+position = Vector2(61, 44)
+texture = ExtResource("11_6b0yg")
+hframes = 10
+frame = 8
+
+[node name="Button" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/NineCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="TenCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/TenCard"]
+position = Vector2(61, 44)
+texture = ExtResource("12_7mrbw")
+hframes = 10
+frame = 9
+
+[node name="Button" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/TenCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="ElevenCard" type="Label" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer"]
+z_index = 99
+layout_mode = 2
+text = "CAR"
+label_settings = SubResource("LabelSettings_4o1l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/ElevenCard"]
+position = Vector2(61, 44)
+texture = ExtResource("15_6en6m")
+hframes = 3
+
+[node name="Button" type="TextureButton" parent="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/ElevenCard"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.145
+anchor_top = -0.239
+anchor_right = 0.839
+anchor_bottom = 1.239
+offset_left = 0.0199986
+offset_top = 0.0320015
+offset_right = -0.0360031
+offset_bottom = -0.0320053
+
+[node name="ChargeSlider" type="HSlider" parent="ActionMode/CheatingMode"]
+z_index = 99
+layout_mode = 0
+offset_left = 303.0
+offset_top = 593.0
+offset_right = 577.0
+offset_bottom = 609.0
+scale = Vector2(2, 2)
+max_value = 10.0
+step = 0.1
+editable = false
+scrollable = false
+
+[node name="CardContainer" type="HBoxContainer" parent="ActionMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.273
+anchor_top = 0.647
+anchor_right = 0.727
+anchor_bottom = 0.866
+offset_left = -0.496002
+offset_top = -72.301
+offset_right = 0.495911
+offset_bottom = -72.2133
+theme_override_constants/separation = -100
+
+[node name="Card1" parent="ActionMode/CardContainer" instance=ExtResource("8_0ae84")]
+z_index = 99
+layout_mode = 2
+
+[node name="Card2" parent="ActionMode/CardContainer" instance=ExtResource("8_0ae84")]
+z_index = 99
+layout_mode = 2
+
+[node name="DayEndMode" type="Control" parent="."]
+visible = false
+z_index = 99
+layout_mode = 3
+anchors_preset = 0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+script = ExtResource("12_tvmr1")
+
+[node name="Panel" type="Panel" parent="DayEndMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CountinueButton" type="Button" parent="DayEndMode/Panel"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.299
+anchor_top = 0.741
+anchor_right = 0.702
+anchor_bottom = 0.954
+offset_left = -2.448
+offset_top = 1.832
+offset_right = -2.70404
+offset_bottom = 1.80798
+text = "Next Day"
+
+[node name="LeaveButton" type="Button" parent="DayEndMode/Panel"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.024
+anchor_top = 0.824
+anchor_right = 0.121
+anchor_bottom = 0.969
+offset_left = 0.351999
+offset_top = 0.0479736
+offset_right = -0.392014
+offset_bottom = 0.0879517
+text = "Leave"
+
+[node name="Label" type="Label" parent="DayEndMode/Panel"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.282
+anchor_right = 0.718
+anchor_bottom = 0.27
+offset_left = 0.135986
+offset_right = -0.136047
+offset_bottom = 0.0399933
+text = "Day End"
+label_settings = SubResource("LabelSettings_q37j0")
+
+[node name="GameEndMode" type="Control" parent="."]
+visible = false
+z_index = 99
+layout_mode = 3
+anchors_preset = 0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+
+[node name="Panel" type="Panel" parent="GameEndMode"]
+z_index = 99
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="GameEndMode/Panel"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.299
+anchor_top = 0.741
+anchor_right = 0.702
+anchor_bottom = 0.954
+offset_left = 0.551971
+offset_top = -0.16803
+offset_right = 0.295959
+offset_bottom = -0.192017
+text = "Main Menu"
+
+[node name="GameOverLabel" type="Label" parent="GameEndMode/Panel"]
+z_index = 99
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.182
+anchor_right = 0.819
+anchor_bottom = 0.27
+offset_left = 0.335983
+offset_right = 0.511902
+offset_bottom = 0.0399933
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_sfwc5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Table2" type="Sprite2D" parent="."]
+modulate = Color(0.215686, 0.215686, 0.215686, 1)
+position = Vector2(-4, 299)
+scale = Vector2(2, 2)
+texture = ExtResource("18_awhij")
+
+[node name="Table3" type="Sprite2D" parent="."]
+modulate = Color(0.215686, 0.215686, 0.215686, 1)
+z_index = 1
+position = Vector2(1, 387)
+scale = Vector2(2, 2)
+texture = ExtResource("18_awhij")
+
+[node name="Table4" type="Sprite2D" parent="."]
+modulate = Color(0.215686, 0.215686, 0.215686, 1)
+position = Vector2(-5, 300)
+scale = Vector2(2, 2)
+texture = ExtResource("19_cuio4")
+
+[node name="CasinoBackground" type="Sprite2D" parent="."]
+modulate = Color(0.215686, 0.215686, 0.215686, 1)
+z_index = -10
+position = Vector2(1, 4)
+scale = Vector2(2, 2)
+texture = ExtResource("17_c0284")
+
+[node name="Dealer" type="Node2D" parent="."]
+script = ExtResource("13_h0ipw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dealer"]
+z_index = -1
+position = Vector2(4, -89)
+scale = Vector2(3, 3)
+texture = ExtResource("17_0a5uf")
+hframes = 6
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dealer/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_yuykq")
+}
+
+[node name="Oppenent" type="Node2D" parent="."]
+position = Vector2(576.61, 0.320007)
+script = ExtResource("11_q36c3")
+
+[node name="Gambeler" type="Sprite2D" parent="Oppenent"]
+position = Vector2(-123.61, -11.32)
+scale = Vector2(3, 3)
+texture = ExtResource("21_jfbvf")
+flip_h = true
+hframes = 7
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Oppenent/Gambeler"]
+libraries = {
+"": SubResource("AnimationLibrary_6untr")
+}
+
+[node name="CardContainer" type="VBoxContainer" parent="Oppenent"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.63
+anchor_top = 0.238
+anchor_right = 0.735
+anchor_bottom = 0.577
+offset_left = -261.0
+offset_top = -110.0
+offset_right = -260.0
+offset_bottom = -38.0
+
+[node name="Oppenent2" type="Node2D" parent="."]
+position = Vector2(-302.475, 0.32)
+script = ExtResource("11_q36c3")
+Enemy_Num = 2
+
+[node name="Gambeler" type="Sprite2D" parent="Oppenent2"]
+position = Vector2(-123.61, -11.32)
+scale = Vector2(3, 3)
+texture = ExtResource("21_jfbvf")
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Oppenent2/Gambeler"]
+libraries = {
+"": SubResource("AnimationLibrary_6untr")
+}
+
+[node name="CardContainer" type="VBoxContainer" parent="Oppenent2"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.63
+anchor_top = 0.238
+anchor_right = 0.735
+anchor_bottom = 0.577
+offset_left = -261.0
+offset_top = -110.0
+offset_right = -260.0
+offset_bottom = -38.0
+
+[node name="Camera" type="Node2D" parent="."]
+position = Vector2(160.135, -166)
+script = ExtResource("12_yluab")
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera"]
+modulate = Color(0.94902, 0.94902, 0.94902, 1)
+z_index = -2
+position = Vector2(79.865, -120)
+scale = Vector2(3, 3)
+texture = ExtResource("23_0fw31")
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_n06cu")
+}
+
+[connection signal="button_down" from="BettingMode/SubtractButton" to="BettingMode" method="_Sub_Button_down"]
+[connection signal="button_down" from="BettingMode/AddButton" to="BettingMode" method="_Add_Button_down"]
+[connection signal="button_down" from="BettingMode/PlaceBetButton" to="BettingMode" method="_Place_Bet"]
+[connection signal="button_down" from="ActionMode/ChoiceMode/StandButton" to="ActionMode" method="Stand_Button_Down"]
+[connection signal="button_down" from="ActionMode/ChoiceMode/SurrenderButton" to="ActionMode" method="Surrender_Button_Down"]
+[connection signal="button_down" from="ActionMode/ChoiceMode/CheatButton" to="ActionMode" method="Cheat_Button_Down"]
+[connection signal="button_down" from="ActionMode/ChoiceMode/HitButton" to="ActionMode" method="Hit_Button_Down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/BackButton" to="ActionMode" method="Cheat_BackButton_Down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ChangeButton" to="ActionMode" method="Cheat_ChangeButton_Down"]
+[connection signal="button_up" from="ActionMode/CheatingMode/ChangeButton" to="ActionMode" method="Cheat_ChangeButton_Up"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/AceCard/AceButton" to="ActionMode" method="AceCard_down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/TwoCard/Button" to="ActionMode" method="TwoCard_down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/ThreeCard/Button" to="ActionMode" method="ThreeCard_down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/FourCard/Button" to="ActionMode" method="FourCard_down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/FiveCard/Button" to="ActionMode" method="FiveCard_down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/SixCard/Button" to="ActionMode" method="SixCard_down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/SevenCard/Button" to="ActionMode" method="SevenCard_down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/EightCard/Button" to="ActionMode" method="EightCard_down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/NineCard/Button" to="ActionMode" method="NineCard_down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/TenCard/Button" to="ActionMode" method="TenCard_down"]
+[connection signal="button_down" from="ActionMode/CheatingMode/ScrollContainer/HBoxContainer/ElevenCard/Button" to="ActionMode" method="ElevenCard_down"]
+[connection signal="button_down" from="DayEndMode/Panel/CountinueButton" to="." method="Countinue_Button_down"]
